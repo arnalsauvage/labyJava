@@ -6,7 +6,7 @@ public class fantome extends personnage {
 	Orientation monOrientation;
 	int sommeil; // Définit le nombre de frames inactives entre deux déplacements
 	int reveilDans; // Définit le nombre de frames restant avant le réveil
-	
+
 	public fantome(int x, int y, int laValeur, Grille laGrille, int vSommeil, int typePerso) {
 		super(x, y, laValeur, laGrille);
 		monOrientation = new Orientation(0);
@@ -14,18 +14,17 @@ public class fantome extends personnage {
 		reveilDans = sommeil;
 		this.typePerso = typePerso;
 	}
-	
+
 	public fantome(Grille laGrille, int laValeur, int vSommeil, int typePerso) {
-		
 		super(1, 1, laValeur, laGrille);
 		Random Rand = new Random();
 		int x, y;
 		x = Rand.nextInt(laGrille.largeur/2);
 		x = 2*x +1;
-		
+
 		y = Rand.nextInt(laGrille.hauteur/2);
 		y = 2*y +1;
-		
+
 		this.maPosition.x = x;
 		this.maPosition.y = y;
 
@@ -34,13 +33,13 @@ public class fantome extends personnage {
 		y = Rand.nextInt(255);
 		z = Rand.nextInt(255);
 		setCouleur(x,y,z);
-		
+
 		monOrientation = new Orientation(0);
 		sommeil = vSommeil;
 		reveilDans = sommeil;
 		this.typePerso = typePerso;
 	}
-	
+
 	public void parcoursMainDroite(){
 		monOrientation.pivote();
 		while (!avance())
@@ -53,18 +52,18 @@ public class fantome extends personnage {
 	}
 
 	public boolean avance(){
-			int xchute, ychute;
-			xchute = maPosition.getX() +  monOrientation.getX();
-			ychute = maPosition.getY() +  monOrientation.getY();
-			if( maGrille.getXY(xchute, ychute)==valeur){
-				maPosition.setX(xchute);
-				maPosition.setY(ychute);
-				return true;
-			}
-			else
-				return false;
+		int xchute, ychute;
+		xchute = maPosition.getX() +  monOrientation.getX();
+		ychute = maPosition.getY() +  monOrientation.getY();
+		if( maGrille.getXY(xchute, ychute)==valeur){
+			maPosition.setX(xchute);
+			maPosition.setY(ychute);
+			return true;
+		}
+		else
+			return false;
 	}
-	
+
 	public boolean tourDeJeu()
 	{
 		reveilDans--;

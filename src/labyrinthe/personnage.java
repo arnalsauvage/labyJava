@@ -72,7 +72,7 @@ public class personnage
 		int r = ( 2*couleur.getRed() + Autreperso.couleur.getRed()) /3;
 		int g = ( 2*couleur.getGreen() + Autreperso.couleur.getGreen()) /3;
 		int b = ( 2*couleur.getBlue() + Autreperso.couleur.getBlue()) /3;	
-		
+
 		int r2 = ( couleur.getRed() + 2*Autreperso.couleur.getRed()) /3;
 		int g2 = ( couleur.getGreen() + 2*Autreperso.couleur.getGreen()) /3;
 		int b2 = ( couleur.getBlue() + 2*Autreperso.couleur.getBlue()) /3;	

@@ -71,7 +71,6 @@ implements KeyListener {
 			}
 		}
 		
-
 		dessineLaby(g, maTaillex, maTailley, x, y);
 
 		if (game_on){

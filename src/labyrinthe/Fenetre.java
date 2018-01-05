@@ -6,28 +6,26 @@ import java.awt.event.ActionListener;
 public class Fenetre extends JFrame
 implements ActionListener{
 	private static final long serialVersionUID = 1L;
-	private Panneau pan = new Panneau();
+	private Panneau panneau = new Panneau();
 
 	public Fenetre(){        
 		this.setTitle("Animation labyrinthe");
 		this.setSize(300, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
-		this.setContentPane(pan);
+		this.setContentPane(panneau);
 		this.setVisible(true);
-		addKeyListener(pan);
+		addKeyListener(panneau);
 		go();
 	}
 
 	private void go(){
-		//Dans cet exemple, j'utilise une boucle while
-		//Vous verrez qu'elle fonctionne très bien
 		while(true){
 			//On redessine notre Panneau
-			pan.repaint();
-			//Comme on dit : la pause s'impose ! Ici, trois millièmes de seconde
+			panneau.repaint();
+			//Comme on dit : la pause s'impose ! Ici, 15 millièmes de seconde
 			try {
-				Thread.sleep(10);
+				Thread.sleep(15);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

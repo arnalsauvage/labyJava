@@ -1,12 +1,14 @@
 package labyrinthe;
+
 public class Orientation {
-	int direction;
+	private int direction;
 	// 0 : haut, 1 : droite, 2 : bas, 3 : gauche
 	
 	public Orientation (int dir)
 	{
 		direction = dir %4;
 	}
+	
 	public void pivote(){
 		direction ++;
 		if (direction == 4)
@@ -36,8 +38,7 @@ public class Orientation {
 	}
 	
 	public void demitour(){
-		direction += 2;
-		direction = direction %4;
+		setDirection (direction +2);
 	}
 	
 	public int getX(){
@@ -57,8 +58,17 @@ public class Orientation {
 //		if (direction==2)
 		return 1;
 	}
+	
+	
+	public int getDirection()
+	{
+		return (direction);
+	}
+	
 	public void setDirection(int newDir)
 	{
 		direction = newDir %4;
+		if (direction<0)
+			direction+=4;
 	}
 }

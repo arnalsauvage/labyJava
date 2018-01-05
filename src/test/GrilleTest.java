@@ -60,7 +60,20 @@ public class GrilleTest {
 
 	@Test
 	public void testElementAuHAsard() {
-		fail("Not yet implemented");
+		int [][] grille = {{2,2},{2,2},{2,2}};
+		Grille grilleDeTest = new Grille(3, 2, grille);
+		assertNull(grilleDeTest.elementAuHAsard(1));
+		assertNotNull( grilleDeTest.elementAuHAsard(2));
+		assertNotNull( grilleDeTest.elementAuHAsard(2));
+		assertNotNull( grilleDeTest.elementAuHAsard(2));
+		assertNotNull( grilleDeTest.elementAuHAsard(2));
+		assertNotNull( grilleDeTest.elementAuHAsard(2));
+		assertNotNull( grilleDeTest.elementAuHAsard(2));
+		assertNotNull( grilleDeTest.elementAuHAsard(2));
+		assertNotNull( grilleDeTest.elementAuHAsard(2));
+		assertNotNull( grilleDeTest.elementAuHAsard(2));
+		assertNotNull( grilleDeTest.elementAuHAsard(2));
+		assertNotNull( grilleDeTest.elementAuHAsard(2));
 	}
 
 }

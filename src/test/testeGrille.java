@@ -1,3 +1,7 @@
+package test;
+
+import labyrinthe.Grille;
+
 public class testeGrille {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

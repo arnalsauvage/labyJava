@@ -1,3 +1,4 @@
+package labyrinthe;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -33,6 +34,7 @@ implements KeyListener {
 		pacman = new personnage(1,1,1,maGrille);
 		// Le creuseur se déplace sur du 0 et creuse du 1
 		monCreuseur = new Creuseur (1,1,0,1,maGrille);
+		maGrille.setXY(1, 1, 1);
 		pinky = new fantome(largeurJeu-4,hauteurJeu-4,1,maGrille,15,1);
 		lefty = new fantome(largeurJeu-4,hauteurJeu-4,1,maGrille,25,2);
 		

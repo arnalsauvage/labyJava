@@ -1,3 +1,4 @@
+package labyrinthe;
 public class Orientation {
 	int direction;
 	// 0 : haut, 1 : droite, 2 : bas, 3 : gauche

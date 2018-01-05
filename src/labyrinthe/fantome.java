@@ -1,3 +1,4 @@
+package labyrinthe;
 import java.util.Random;
 
 public class fantome extends personnage {
@@ -19,10 +20,10 @@ public class fantome extends personnage {
 		super(1, 1, laValeur, laGrille);
 		Random Rand = new Random();
 		int x, y;
-		x = Rand.nextInt(laGrille.x/2);
+		x = Rand.nextInt(laGrille.largeur/2);
 		x = 2*x +1;
 		
-		y = Rand.nextInt(laGrille.y/2);
+		y = Rand.nextInt(laGrille.hauteur/2);
 		y = 2*y +1;
 		
 		this.maPosition.x = x;

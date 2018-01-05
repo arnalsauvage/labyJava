@@ -1,3 +1,4 @@
+package labyrinthe;
 import javax.swing.JFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -1,3 +1,4 @@
+package labyrinthe;
 public class fenetreJeu {
 
 	public static void main(String[] args) {

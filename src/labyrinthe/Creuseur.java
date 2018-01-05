@@ -1,10 +1,15 @@
+package labyrinthe;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Creuseur extends personnage{
 
+	// Orientation du personnage (haut bas gauche ou droite)
 	Orientation monOrientation;
+	// Le creuseur creuse les valeurs = sa valeur de personnage, 
+	// et les remplace par sa valeurCreusage
 	int valeurCreusage;
+	// Au fur et à mesure de ses déplacements, il mémorise les endroits où il peut encore creuser
 	ArrayList<position> listeDesPossibles;
 
 	public int getValeurCreusage() {
@@ -22,9 +27,9 @@ public class Creuseur extends personnage{
 		vy = 2;
 		valeurCreusage = vc;
 		listeDesPossibles = new ArrayList<position>();
-		// TODO Auto-generated constructor stub
 	}
 
+	// Permet de positionner le creuseur dans la grille 
 	public boolean poser (int px, int py)	{
 		if (maGrille.pointDansGrille(px, py))
 			//			if( maGrille.getXY(px,py)==valeur)
@@ -39,24 +44,19 @@ public class Creuseur extends personnage{
 	// Cette méthode compte le nombre de creusages potentiels à partir de la position actuelle
 	private int comptePossibles(){
 		int nbrePossibles = 0;
-		int xchute, ychute;
-		position laPosition;
-		laPosition = new position(maPosition.getX(),maPosition.getY());
-		for (int i = 1;  i<5; i++){
+		
+		// On va tester dans les 4 directions
+		for (int direction = 1;  direction<5; direction++){
 			monOrientation.pivote();
-			xchute = maPosition.getX() +  monOrientation.getX();
-			ychute = maPosition.getY() +  monOrientation.getY();
-			if( maGrille.getXY(xchute, ychute)==valeur)
+			
+			// si on peut avancer de deux cases...
+			if( ( regardeDevant(1) == valeur) &&  ( regardeDevant(2) == valeur))
 			{
-				xchute = maPosition.getX() + 2 * monOrientation.getX();
-				ychute = maPosition.getY() + 2 * monOrientation.getY();
-				if( maGrille.getXY(xchute, ychute)==valeur){
 					nbrePossibles++;
-				}
 			}
 		}
 		if (nbrePossibles>0){
-			if(ajouteXYdansLaListeDesPossibles(laPosition)==true)
+			if(ajouteXYdansLaListeDesPossibles(maPosition)==true)
 				System.out.println("Nb éléments :" + listeDesPossibles.size() + " ajouté " + maPosition.getX()+","+maPosition.getY());
 			else 
 				System.out.println("Nb éléments :" + listeDesPossibles.size() + " impossible d'ajouter " + maPosition.getX()+","+maPosition.getY());
@@ -71,6 +71,16 @@ public class Creuseur extends personnage{
 		return nbrePossibles;
 	}
 
+	// Regarde la valeur de la case située n cases devant soi
+	private int regardeDevant(int nbreCases) {
+		int regardeDevant;
+		int xchute = maPosition.getX() + nbreCases * monOrientation.getX();
+		int ychute = maPosition.getY() + nbreCases * monOrientation.getY();
+		regardeDevant = maGrille.getXY(xchute, ychute);
+		return regardeDevant;
+	}
+
+	// Ajoute une position dans la liste des possibles
 	private boolean ajouteXYdansLaListeDesPossibles(position positionTestee){
 		int monIndex = listeDesPossibles.size();
 		position unePosition;
@@ -88,6 +98,7 @@ public class Creuseur extends personnage{
 		return (!trouve);
 	}
 
+	// Enlève une position de la liste des possibles
 	private boolean enleveXYdeLaListeDesPossibles(int monx, int mony){
 		int monIndex = listeDesPossibles.size();
 		position unePosition;
@@ -102,14 +113,18 @@ public class Creuseur extends personnage{
 		}
 		return false;
 	}
-
+	
+	// Quand le creuseur avance, il laisse la valeur creusage et met à jour ses coordonnées
+	private void avance() {
+		maPosition.setX(maPosition.getX() + monOrientation.getX());
+		maPosition.setY(maPosition.getY() + monOrientation.getY());
+		maGrille.setXY(maPosition.getX(),maPosition.getY(),valeurCreusage);
+	}
+	
+	// Opère une occurence du processus de creuser le labyrinthe
 	public boolean creuser (){
-		int xchute;
-		int ychute;
 		position unePosition;
-
 		//		System.out.println("Valeur orientation début : "+monOrientation.direction);
-
 		Random rand = new Random();
 		// Si on ne peut pas creuser ici, on va creuser ailleurs
 		while (comptePossibles()==0)
@@ -121,36 +136,21 @@ public class Creuseur extends personnage{
 			unePosition =  (position) listeDesPossibles.get(nombreAleatoire);
 			poser(unePosition.x, unePosition.y);
 		}
+		
 		// On prend une orientation au hasard
 		int nombreAleatoire = rand.nextInt(4 ) + 1;
 		monOrientation.setDirection(nombreAleatoire);
 
 		// On essaiera de creuser dans les 4 directions
 		for (int i = 1;  i<5; i++){		
-			xchute = maPosition.getX() +  monOrientation.getX();
-			ychute = maPosition.getY() +  monOrientation.getY();
-			if( maGrille.getXY(xchute, ychute)==valeur)
-			{
-				xchute = maPosition.getX() + 2 * monOrientation.getX();
-				ychute = maPosition.getY() + 2 * monOrientation.getY();
-				if( maGrille.getXY(xchute, ychute)==valeur)
+			if( ( regardeDevant(1) == valeur) &&  ( regardeDevant(2) == valeur))
 				{
 					// On creuse la destination
-					maGrille.setXY(maPosition.getX(),maPosition.getY(),valeurCreusage);
-					maPosition.setX(maPosition.getX() + monOrientation.getX());
-					maPosition.setY(maPosition.getY() + monOrientation.getY());
-					maGrille.setXY(maPosition.getX(),maPosition.getY(),valeurCreusage);
-					maPosition.setX(maPosition.getX() + monOrientation.getX());
-					maPosition.setY(maPosition.getY() + monOrientation.getY());
-					maGrille.setXY(maPosition.getX(),maPosition.getY(),valeurCreusage);
-
-					// on met à jour le champ des possibles
-					//					comptePossibles();
-
+					avance();
+					avance();
 					//					System.out.println("Valeur orientation fin : "+monOrientation.direction);
 					return true;
 				}
-			}
 			monOrientation.pivote();
 		}
 		return false;

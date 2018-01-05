@@ -1,3 +1,4 @@
+package labyrinthe;
 import java.awt.Color;
 
 public class personnage 

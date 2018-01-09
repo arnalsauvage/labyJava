@@ -11,6 +11,10 @@ public class Creuseur extends personnage{
 	int valeurCreusage;
 	// Au fur et à mesure de ses déplacements, il mémorise les endroits où il peut encore creuser
 	ArrayList<position> listeDesPossibles;
+	
+	// Indique l'orientation par défaut lors du creusage
+	// Ceci devrait donner des labyrinthes plutôt verticaux ou horizontaux
+	Random rand = new Random();
 
 	public int getValeurCreusage() {
 		return valeurCreusage;
@@ -121,6 +125,32 @@ public class Creuseur extends personnage{
 		maGrille.setXY(maPosition.getX(),maPosition.getY(),valeurCreusage);
 	}
 	
+	// Décide d'une orientation par défaut pour orienter le style du labyrinthe
+	private int orientationParDefaut(){
+		int orientation = 0; 
+		int coeff0 = this.maGrille.hauteur + this.getY() - (this.maGrille.hauteur/2); 
+		int coeff1 = (3*this.maGrille.largeur/2) - this.getX() ;
+		int coeff2 = (3*this.maGrille.hauteur/2) - this.getY() ; 
+		int coeff3 = this.maGrille.largeur + this.getX() - (this.maGrille.largeur/2);
+		coeff0 *= coeff0;
+		coeff1 *= coeff1;
+		coeff2 *= coeff2;
+		coeff3 *= coeff3;
+		
+		int sommeCoeffs = coeff0 + coeff1 + coeff2 + coeff3;
+		Random rand = new Random();
+		int nombreAleatoire = rand.nextInt(sommeCoeffs );
+		if (nombreAleatoire < coeff0)
+			orientation = 0;
+		else if (nombreAleatoire < coeff1+coeff0)
+			orientation = 1;
+		else if (nombreAleatoire < coeff1+coeff0+coeff2)
+			orientation = 2;
+		else 
+			orientation = 3;
+		return orientation;
+	}
+	
 	// Opère une occurence du processus de creuser le labyrinthe
 	public boolean creuser (){
 		position unePosition;
@@ -140,6 +170,7 @@ public class Creuseur extends personnage{
 		// On prend une orientation au hasard
 		int nombreAleatoire = rand.nextInt(4 ) + 1;
 		monOrientation.setDirection(nombreAleatoire);
+		monOrientation.setDirection(orientationParDefaut());
 
 		// On essaiera de creuser dans les 4 directions
 		for (int i = 1;  i<5; i++){		

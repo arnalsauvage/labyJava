@@ -7,6 +7,8 @@ public class Fenetre extends JFrame
 implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private Panneau panneau = new Panneau();
+	// 5 : rapide , 200 lent
+	private int delaiAffichage = 5;  
 
 	public Fenetre(){        
 		this.setTitle("Animation labyrinthe");
@@ -25,7 +27,7 @@ implements ActionListener{
 			panneau.repaint();
 			//Comme on dit : la pause s'impose ! Ici, 15 millièmes de seconde
 			try {
-				Thread.sleep(15);
+				Thread.sleep(delaiAffichage);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

@@ -17,23 +17,24 @@ implements KeyListener {
 	boolean creuser = false;
 	boolean game_on = false;
 	listeDePersonnages listePersos;
-
+	int largeurJeu = 53;
+	int hauteurJeu = 31;
+	
 	public Panneau(){
-		// Il faut des valeurs impaires !
-		int largeurJeu=52;
-		int hauteurJeu=30;
+		// Il faut des valeurs impaires ! 53 x 31 est pas mal
+
 		if (largeurJeu%2==0)
 			largeurJeu++;
 		if (hauteurJeu%2==0)
 			hauteurJeu++;
 		maGrille = new Grille(largeurJeu,hauteurJeu);
-		maGrille.remplirGrille(1, 1, hauteurJeu-1, hauteurJeu-1, 0);
+		maGrille.remplirGrille(1, 1, largeurJeu-1, hauteurJeu-1, 0);
 		
 		listePersos = new listeDePersonnages();
 		
-		pacman = new personnage(1,1,1,maGrille);
+		pacman = new personnage( 1, 1, 1, maGrille);
 		// Le creuseur se déplace sur du 0 et creuse du 1
-		monCreuseur = new Creuseur (1,1,0,1,maGrille);
+		monCreuseur = new Creuseur (1, 1, 0, 1, maGrille);
 		maGrille.setXY(1, 1, 1);
 		pinky = new fantome(largeurJeu-4,hauteurJeu-4,1,maGrille,15,1);
 		lefty = new fantome(largeurJeu-4,hauteurJeu-4,1,maGrille,25,2);
@@ -145,6 +146,7 @@ implements KeyListener {
 		pacman.deplace(vx, vy);
 
 		if(e.getKeyCode()==KeyEvent.VK_F1)
+			game_on = false;
 			creuser = true;
 		if(e.getKeyCode()==KeyEvent.VK_F2)
 			game_on = !game_on;
@@ -155,6 +157,12 @@ implements KeyListener {
 		if(e.getKeyCode()==KeyEvent.VK_F4){
 			unPerso = new fantome(maGrille,1,15,2);
 			listePersos.ajoutePersonnage(unPerso);
+		}
+		if(e.getKeyCode()==KeyEvent.VK_F12){
+			game_on = false;
+			maGrille.remplirGrille(1, 1, largeurJeu-1, hauteurJeu-1, 0);
+			maGrille.setXY(1, 1, 1);
+			monCreuseur = new Creuseur (1, 1, 0, 1, maGrille);
 		}
 	}
 

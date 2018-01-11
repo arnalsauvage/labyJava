@@ -47,7 +47,7 @@ public class CreuseurTest {
 		Grille grilleDeTest = new Grille(5, 5);
 		grilleDeTest.remplirGrille(0,0,4,4, 0);
 		Creuseur monCreuseur = new Creuseur (1,1,0,1,grilleDeTest);
-		grilleDeTest.setXY(1, 1, 1);
+		grilleDeTest.setValeur(1, 1, 1);
 		assertEquals(true, monCreuseur.creuser());
 		assertEquals(true, monCreuseur.creuser());
 		assertEquals(true, monCreuseur.creuser());

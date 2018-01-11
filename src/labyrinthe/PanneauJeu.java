@@ -3,9 +3,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class Panneau
+public class PanneauJeu
 extends JPanel
 implements KeyListener {
 	private static final long serialVersionUID = 1L;
@@ -20,7 +22,7 @@ implements KeyListener {
 	int largeurJeu = 53;
 	int hauteurJeu = 31;
 	
-	public Panneau(){
+	public PanneauJeu(){
 		// Il faut des valeurs impaires ! 53 x 31 est pas mal
 
 		if (largeurJeu%2==0)
@@ -35,7 +37,7 @@ implements KeyListener {
 		pacman = new personnage( 1, 1, 1, maGrille);
 		// Le creuseur se déplace sur du 0 et creuse du 1
 		monCreuseur = new Creuseur (1, 1, 0, 1, maGrille);
-		maGrille.setXY(1, 1, 1);
+		maGrille.setValeur(1, 1, 1);
 		pinky = new fantome(largeurJeu-4,hauteurJeu-4,1,maGrille,15,1);
 		lefty = new fantome(largeurJeu-4,hauteurJeu-4,1,maGrille,25,2);
 		
@@ -113,7 +115,7 @@ implements KeyListener {
 		int maValeur;
 		for(int py = 0; py < y; py++){
 			for(int px = 0; px < x; px++){
-				maValeur = maGrille.getXY(px, py);
+				maValeur = maGrille.getValeur(px, py);
 				//			System.out.println("mavaleur " + maValeur);
 				switch (maValeur){
 				case 0 : g.setColor(Color.BLACK);break;
@@ -125,6 +127,7 @@ implements KeyListener {
 				g.fillOval(px*maTaillex, py*maTailley, maTaillex, maTailley);
 			}
 		}
+		g.drawString("F1 pour afficher l'aide", 10, (y+1)*maTailley);
 	}
 
 	public void keyPressed(KeyEvent e)
@@ -145,23 +148,26 @@ implements KeyListener {
 		pacman.setVy(1);
 		pacman.deplace(vx, vy);
 
-		if(e.getKeyCode()==KeyEvent.VK_F1)
+		if(e.getKeyCode()==KeyEvent.VK_F1){
+			JOptionPane.showMessageDialog(null, "F2 : creuser le laby, \n F3 : démarrer / stopper la partie, \n F4 : ajouter des fantomes, \n F12 : RAZ","Info Labyrinthe", JOptionPane.INFORMATION_MESSAGE);
+		}
+		if(e.getKeyCode()==KeyEvent.VK_F2){
 			game_on = false;
 			creuser = true;
-		if(e.getKeyCode()==KeyEvent.VK_F2)
+		}
+		if(e.getKeyCode()==KeyEvent.VK_F3)
+		{			
 			game_on = !game_on;
-		if(e.getKeyCode()==KeyEvent.VK_F3){
+		}
+		if(e.getKeyCode()==KeyEvent.VK_F4){
 			unPerso = new fantome(maGrille,1,15,1);
 			listePersos.ajoutePersonnage(unPerso);
 		}
-		if(e.getKeyCode()==KeyEvent.VK_F4){
-			unPerso = new fantome(maGrille,1,15,2);
-			listePersos.ajoutePersonnage(unPerso);
-		}
+
 		if(e.getKeyCode()==KeyEvent.VK_F12){
 			game_on = false;
 			maGrille.remplirGrille(1, 1, largeurJeu-1, hauteurJeu-1, 0);
-			maGrille.setXY(1, 1, 1);
+			maGrille.setValeur(1, 1, 1);
 			monCreuseur = new Creuseur (1, 1, 0, 1, maGrille);
 		}
 	}

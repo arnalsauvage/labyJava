@@ -92,7 +92,7 @@ public class Grille {
 	}
 
 	// renvoie la valeur du pont x, y dans la grille
-	public int getXY(int x, int y) {
+	public int getValeur(int x, int y) {
 		// 
 		if (pointDansGrille (x, y))
 			return tableau[x][y];
@@ -101,7 +101,7 @@ public class Grille {
 	}
 
 	// initialise la valeur dans la grille (x,y)
-	public boolean setXY(int mvx, int mvy, int valeur) {
+	public boolean setValeur(int mvx, int mvy, int valeur) {
 		if (pointDansGrille (mvx, mvy)){
 			tableau[mvx][mvy] = valeur;
 			return true;

@@ -12,7 +12,7 @@ public class fantome extends personnage {
 		monOrientation = new Orientation(0);
 		sommeil = vSommeil;
 		reveilDans = sommeil;
-		this.typePerso = typePerso;
+		this.setTypePerso( typePerso);
 	}
 
 	public fantome(Grille laGrille, int laValeur, int vSommeil, int typePerso) {
@@ -25,8 +25,8 @@ public class fantome extends personnage {
 		y = Rand.nextInt(laGrille.hauteur/2);
 		y = 2*y +1;
 
-		this.maPosition.x = x;
-		this.maPosition.y = y;
+		this.getMaPosition().setX(x);
+		this.getMaPosition().setY(y);
 
 		int z;
 		x = Rand.nextInt(255);
@@ -37,7 +37,7 @@ public class fantome extends personnage {
 		monOrientation = new Orientation(0);
 		sommeil = vSommeil;
 		reveilDans = sommeil;
-		this.typePerso = typePerso;
+		this.setTypePerso(typePerso);
 	}
 
 	public void parcoursMainDroite(){
@@ -53,9 +53,9 @@ public class fantome extends personnage {
 
 	public boolean avance(){
 		int xchute, ychute;
-		xchute = maPosition.getX() +  monOrientation.getX();
-		ychute = maPosition.getY() +  monOrientation.getY();
-		if( maGrille.getXY(xchute, ychute)==valeur){
+		xchute = getMaPosition().getX() +  monOrientation.getX();
+		ychute = getMaPosition().getY() +  monOrientation.getY();
+		if( maGrille.getValeur(xchute, ychute)==getValeur()){
 			maPosition.setX(xchute);
 			maPosition.setY(ychute);
 			return true;

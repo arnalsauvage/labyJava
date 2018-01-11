@@ -3,12 +3,12 @@ import java.awt.Color;
 
 public class personnage 
 {
-	position maPosition; // Coordonnées
-	int valeur; // valeur ou peut évoluer le personnage
-	int vx, vy; // vitesse x, y
-	Grille maGrille; // Grille où évolue le personnage
-	Color couleur; //Couleur du personnage
-	int typePerso; // Type perso clavier, souris, robot...
+	protected position maPosition; // Coordonnées
+	protected int valeur; // valeur ou peut évoluer le personnage
+	private int vx, vy; // vitesse x, y
+	protected Grille maGrille; // Grille où évolue le personnage
+	private Color couleur; // Couleur du personnage
+	private int typePerso; // Type perso clavier, souris, robot...
 
 	public   personnage (int x, int y, int laValeur, Grille laGrille){
 		if ((x>=0)&&(y>=0))
@@ -22,6 +22,30 @@ public class personnage
 				this.maGrille = laGrille;
 			}
 		}
+	}
+	
+	public int getValeur() {
+		return valeur;
+	}
+
+	public void setValeur(int valeur) {
+		this.valeur = valeur;
+	}
+
+	public Grille getMaGrille() {
+		return maGrille;
+	}
+
+	public void setMaGrille(Grille maGrille) {
+		this.maGrille = maGrille;
+	}
+
+	public position getMaPosition() {
+		return maPosition;
+	}
+
+	public void setMaPosition(position maPosition) {
+		this.maPosition = maPosition;
 	}
 
 	public int getX() {
@@ -88,7 +112,7 @@ public class personnage
 		// On vérifie que la nouvelle position sera dans la grille
 		if (maGrille.pointDansGrille(mvx, mvy)==true){
 			// On vérifie que le personnage arrive bien dans une case de sa valeur
-			if (maGrille.getXY(mvx,mvy)==valeur)
+			if (maGrille.getValeur(mvx,mvy)==valeur)
 			{
 				maPosition.setX(mvx);
 				maPosition.setY(mvy);

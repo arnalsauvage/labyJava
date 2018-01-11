@@ -40,12 +40,12 @@ public class GrilleTest {
 		grilleDeTest.remplirGrille(0,0, 2,1, 0);
 		
 		grilleDeTest.remplirGrille(1,1, 2,1, 8);
-		assertEquals(grilleDeTest.getXY(0, 0), 0);
-		assertEquals(grilleDeTest.getXY(0, 1), 0);
-		assertEquals(grilleDeTest.getXY(1, 0), 0);
-		assertEquals(grilleDeTest.getXY(1, 1), 8);
-		assertEquals(grilleDeTest.getXY(2, 0), 0);
-		assertEquals(grilleDeTest.getXY(2, 1), 8);
+		assertEquals(grilleDeTest.getValeur(0, 0), 0);
+		assertEquals(grilleDeTest.getValeur(0, 1), 0);
+		assertEquals(grilleDeTest.getValeur(1, 0), 0);
+		assertEquals(grilleDeTest.getValeur(1, 1), 8);
+		assertEquals(grilleDeTest.getValeur(2, 0), 0);
+		assertEquals(grilleDeTest.getValeur(2, 1), 8);
 		
 		}
 

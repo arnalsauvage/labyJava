@@ -27,8 +27,8 @@ public class Creuseur extends personnage{
 	public Creuseur(int x, int y, int valeur, int vc, Grille maGrille) {
 		super(x, y, valeur, maGrille);
 		monOrientation = new Orientation(0);
-		vx = 2;
-		vy = 2;
+		setVx(2);
+		setVy(2);
 		valeurCreusage = vc;
 		listeDesPossibles = new ArrayList<position>();
 	}
@@ -80,7 +80,7 @@ public class Creuseur extends personnage{
 		int regardeDevant;
 		int xchute = maPosition.getX() + nbreCases * monOrientation.getX();
 		int ychute = maPosition.getY() + nbreCases * monOrientation.getY();
-		regardeDevant = maGrille.getXY(xchute, ychute);
+		regardeDevant = maGrille.getValeur(xchute, ychute);
 		return regardeDevant;
 	}
 
@@ -122,7 +122,7 @@ public class Creuseur extends personnage{
 	private void avance() {
 		maPosition.setX(maPosition.getX() + monOrientation.getX());
 		maPosition.setY(maPosition.getY() + monOrientation.getY());
-		maGrille.setXY(maPosition.getX(),maPosition.getY(),valeurCreusage);
+		maGrille.setValeur(maPosition.getX(),maPosition.getY(),valeurCreusage);
 	}
 	
 	// Décide d'une orientation par défaut pour orienter le style du labyrinthe

@@ -3,29 +3,30 @@ import javax.swing.JFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Fenetre extends JFrame
+public class FenetreJeu extends JFrame
 implements ActionListener{
 	private static final long serialVersionUID = 1L;
-	private Panneau panneau = new Panneau();
+	private PanneauJeu panneauJeu = new PanneauJeu();
+	
 	// 5 : rapide , 200 lent
 	private int delaiAffichage = 5;  
 
-	public Fenetre(){        
+	public FenetreJeu(){        
 		this.setTitle("Animation labyrinthe");
 		this.setSize(300, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
-		this.setContentPane(panneau);
+		this.setContentPane(panneauJeu);
 		this.setVisible(true);
-		addKeyListener(panneau);
+		addKeyListener(panneauJeu);
 		go();
 	}
 
 	private void go(){
 		while(true){
 			//On redessine notre Panneau
-			panneau.repaint();
-			//Comme on dit : la pause s'impose ! Ici, 15 millièmes de seconde
+			panneauJeu.repaint();
+
 			try {
 				Thread.sleep(delaiAffichage);
 			} catch (InterruptedException e) {
